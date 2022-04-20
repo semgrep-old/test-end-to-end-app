@@ -4,11 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       docker_tag:
+        default: develop
         required: true
-        type: string
       app_url:
+        default: https://staging.semgrep.dev
         required: true
-        type: string
 
 jobs:
   semgrep-ci:
