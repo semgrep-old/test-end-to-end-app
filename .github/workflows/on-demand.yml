@@ -23,6 +23,6 @@ jobs:
           fi
           semgrep ci
         env:
-          SEMGREP_APP_URL: ${{ inputs.app_url }}
+          SEMGREP_APP_URL: ${{ github.event.inputs.app_url }}
           SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
           SEMGREP_APP_TOKEN_STAGING: ${{ secrets.SEMGREP_STAGING_SECRET }}
