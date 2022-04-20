@@ -21,7 +21,16 @@ jobs:
           if [[ "$SEMGREP_APP_URL" == "https://staging.semgrep.dev" ]]; then
             export SEMGREP_APP_TOKEN=$SEMGREP_APP_TOKEN_STAGING;
           fi
+
+          # assert exit code 0
           semgrep ci
+
+          # add finding
+          echo 10 == 10 > ten_is_ten.py
+          git -c user.name GHA -c user.email bence+gha@r2c.dev commit -A -m "Add finding"
+          
+          # assert exit code 1
+          semgrep ci; [[ $? == 1 ]]
         env:
           SEMGREP_APP_URL: ${{ github.event.inputs.app_url }}
           SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
