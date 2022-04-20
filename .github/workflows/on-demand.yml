@@ -14,7 +14,7 @@ jobs:
   semgrep-ci:
     runs-on: ubuntu-latest
     container:
-      image: returntocorp/semgrep:${{ inputs.docker_tag }}
+      image: returntocorp/semgrep:${{ github.event.inputs.docker_tag }}
     steps:
       - uses: actions/checkout@v3
       - run: |
