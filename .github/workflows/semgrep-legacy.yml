@@ -1,0 +1,19 @@
+# Imitates on-prem legacy setup for a customer running app from Mar 2022
+# (leaving out customer name for privacy reasons)
+on:
+  pull_request: {}
+name: Semgrep Staging
+jobs:
+  semgrep-staging:
+    name: Scan
+    runs-on: ubuntu-latest
+    env:	
+      INPUT_PUBLISHURL: https://legacy.dev.semgrep.dev
+    steps:
+    - uses: actions/checkout@v2
+    - uses: returntocorp/semgrep-action@v1
+      env:
+        SEMGREP_AGENT_DEBUG: 1
+      with:
+        publishToken: ${{ secrets.SEMGREP_STAGING_SECRET }}
+        publishDeployment: 53
